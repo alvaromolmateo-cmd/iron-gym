@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend: Django (runserver)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "args": ["runserver", "127.0.0.1:8000"],
+            "cwd": "${workspaceFolder}/backend",
+            "django": true,
+            "justMyCode": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Frontend: Vite (npm run dev)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev",
+            "cwd": "${workspaceFolder}/frontend"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Iron Gym: Backend + Frontend",
+            "configurations": ["Backend: Django (runserver)", "Frontend: Vite (npm run dev)"],
+            "stopAll": true
+        }
+    ]
+}
