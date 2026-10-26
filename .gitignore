@@ -1,21 +1,21 @@
 # Python
 __pycache__/
 *.py[cod]
-.venv/
-venv/
+# Entorno virtual (piapp-env)
 *-env/
+.venv/
 
 # Django
 db.sqlite3
-media/
-staticfiles/
+# Generados por collectstatic y por las subidas de ficheros
+backend/static/
+backend/media/
 
 # Secretos
 .env
 
 # Editor / SO
-.vscode/*
-!.vscode/launch.json
+.vscode/
 .idea/
 .DS_Store
 Thumbs.db

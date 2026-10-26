@@ -1,3 +1,9 @@
-.venv/
+# UD3.2h Ficheros que no se copian a la imagen
+piapp-env/
 __pycache__/
+*.pyc
 db.sqlite3
+static/
+media/
+Dockerfile
+.dockerignore
