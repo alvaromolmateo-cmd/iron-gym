@@ -19,6 +19,9 @@ class Perfil(models.Model):
     fecha_caducidad = models.DateField(null=True, blank=True)
 
 
+    # UD3.3b - Representación textual del perfil (Perfil)
+    def __str__(self):
+        return str(self.usuario) + ' (' + self.get_tipo_display() + ')'
 
 
 # UD3.3a Modelo Instalacion - Pistas y salas reservables
@@ -37,6 +40,9 @@ class Instalacion(models.Model):
     activa = models.BooleanField(default=True)
 
 
+    # UD3.3b - Representación textual de la instalación (Instalacion)
+    def __str__(self):
+        return self.nombre
 
 
 # UD3.3a Modelo Horario - Apertura semanal de cada instalación
@@ -53,6 +59,10 @@ class Horario(models.Model):
     duracion_franja = models.PositiveIntegerField(default=60)  # en minutos
 
 
+    # UD3.3b - Representación textual del horario (Horario)
+    def __str__(self):
+        return (str(self.instalacion) + ' - ' + self.get_dia_semana_display() + ' '
+                + self.hora_apertura.strftime('%H:%M') + '-' + self.hora_cierre.strftime('%H:%M'))
 
 
 # UD3.3a Modelo Reserva - Un usuario ocupa una instalación en una franja
@@ -71,6 +81,10 @@ class Reserva(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
 
+    # UD3.3b - Representación textual de la reserva (Reserva)
+    def __str__(self):
+        return (str(self.instalacion) + ' - ' + str(self.fecha) + ' '
+                + self.hora_inicio.strftime('%H:%M') + ' (' + str(self.usuario) + ')')
 
 
 # UD3.3a Modelo Bloqueo - Cierre temporal de una instalación
@@ -82,3 +96,6 @@ class Bloqueo(models.Model):
     creado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
 
+    # UD3.3b - Representación textual del bloqueo (Bloqueo)
+    def __str__(self):
+        return str(self.instalacion) + ' - ' + self.motivo

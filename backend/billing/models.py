@@ -10,6 +10,9 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True)
 
 
+    # UD3.3b - Representación textual del cliente
+    def __str__(self):
+        return self.nombre + ' ' + self.apellidos + ' (' + self.nif + ')'
 
 
 
@@ -22,6 +25,9 @@ class Factura(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 
+    # UD3.3b - Representación textual de la factura
+    def __str__(self):
+        return str(self.cliente) + ' - ' + self.numero
 
 
 
@@ -32,4 +38,7 @@ class Cobro(models.Model):
     importe = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 
+    # UD3.3b - Representación textual del cobro
+    def __str__(self):
+        return self.factura.numero + ' - ' + str(self.importe)
 
