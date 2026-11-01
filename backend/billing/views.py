@@ -7,6 +7,9 @@ from .models import Cliente, Factura, Cobro
 class ClienteListView(ListView):
     model = Cliente
     template_name = "billing/cliente_list.html"
+    # UD3.8b - Diez registros por página, con desempate por id.
+    paginate_by = 10
+    ordering = [*Cliente._meta.ordering, "pk"]
 
 
 # UD3.7a - Detalle de Cliente.
@@ -19,6 +22,9 @@ class ClienteDetailView(DetailView):
 class FacturaListView(ListView):
     model = Factura
     template_name = "billing/factura_list.html"
+    # UD3.8b - Diez registros por página, con desempate por id.
+    paginate_by = 10
+    ordering = [*Factura._meta.ordering, "pk"]
 
 
 # UD3.7a - Detalle de Factura.
@@ -31,6 +37,9 @@ class FacturaDetailView(DetailView):
 class CobroListView(ListView):
     model = Cobro
     template_name = "billing/cobro_list.html"
+    # UD3.8b - Diez registros por página, con desempate por id.
+    paginate_by = 10
+    ordering = [*Cobro._meta.ordering, "pk"]
 
 
 # UD3.7a - Detalle de Cobro.
