@@ -9,6 +9,9 @@ class Cliente(models.Model):
     nif = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
 
+    # UD3.3c - Restricciones de clave única
+    class Meta:
+        unique_together = [['nif'], ['email']]
 
     # UD3.3b - Representación textual del cliente
     def __str__(self):
@@ -24,6 +27,9 @@ class Factura(models.Model):
     fecha = models.DateField(default=timezone.now)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    # UD3.3c - Restricciones de clave única
+    class Meta:
+        unique_together = [['numero']]
 
     # UD3.3b - Representación textual de la factura
     def __str__(self):

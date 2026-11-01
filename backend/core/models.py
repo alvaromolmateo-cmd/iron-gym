@@ -58,6 +58,9 @@ class Horario(models.Model):
     hora_cierre = models.TimeField()
     duracion_franja = models.PositiveIntegerField(default=60)  # en minutos
 
+    # UD3.3c - Una instalación solo tiene un horario por día de la semana
+    class Meta:
+        unique_together = [['instalacion', 'dia_semana']]
 
     # UD3.3b - Representación textual del horario (Horario)
     def __str__(self):
@@ -80,6 +83,9 @@ class Reserva(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADOS, default='confirmada')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
+    # UD3.3c - Una instalación no puede reservarse dos veces el mismo día a la misma hora
+    class Meta:
+        unique_together = [['instalacion', 'fecha', 'hora_inicio']]
 
     # UD3.3b - Representación textual de la reserva (Reserva)
     def __str__(self):
@@ -95,6 +101,9 @@ class Bloqueo(models.Model):
     motivo = models.CharField(max_length=200)
     creado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+    # UD3.3c - No se puede registrar dos veces el mismo bloqueo de una instalación
+    class Meta:
+        unique_together = [['instalacion', 'inicio']]
 
     # UD3.3b - Representación textual del bloqueo (Bloqueo)
     def __str__(self):
