@@ -1,0 +1,15 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Reserva sin id; relaciones mediante __str__. -->
+<h1>Detalle de reserva</h1>
+<dl class="row">
+  <dt class="col-sm-4">Usuario</dt><dd class="col-sm-8">{{ object.usuario|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Instalación</dt><dd class="col-sm-8">{{ object.instalacion|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fecha</dt><dd class="col-sm-8">{{ object.fecha|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Hora de inicio</dt><dd class="col-sm-8">{{ object.hora_inicio|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Hora de fin</dt><dd class="col-sm-8">{{ object.hora_fin|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Estado</dt><dd class="col-sm-8">{{ object.get_estado_display|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fecha de creación</dt><dd class="col-sm-8">{{ object.fecha_creacion|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'reserva_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}

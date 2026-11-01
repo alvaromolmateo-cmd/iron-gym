@@ -1,0 +1,13 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Instalacion sin id; relaciones mediante __str__. -->
+<h1>Detalle de instalación</h1>
+<dl class="row">
+  <dt class="col-sm-4">Nombre</dt><dd class="col-sm-8">{{ object.nombre|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Tipo</dt><dd class="col-sm-8">{{ object.get_tipo_display|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Descripción</dt><dd class="col-sm-8">{{ object.descripcion|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Capacidad</dt><dd class="col-sm-8">{{ object.capacidad|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Activa</dt><dd class="col-sm-8">{{ object.activa|yesno:"Sí,No"|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'instalacion_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}

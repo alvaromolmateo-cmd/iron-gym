@@ -1,0 +1,14 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Perfil sin id; relaciones mediante __str__. -->
+<h1>Detalle de perfil</h1>
+<dl class="row">
+  <dt class="col-sm-4">Usuario</dt><dd class="col-sm-8">{{ object.usuario|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Tipo</dt><dd class="col-sm-8">{{ object.get_tipo_display|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">DNI</dt><dd class="col-sm-8">{{ object.dni|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Teléfono</dt><dd class="col-sm-8">{{ object.telefono|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fecha de alta</dt><dd class="col-sm-8">{{ object.fecha_alta|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fecha de caducidad</dt><dd class="col-sm-8">{{ object.fecha_caducidad|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'perfil_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}

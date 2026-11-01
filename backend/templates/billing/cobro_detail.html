@@ -1,0 +1,12 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Cobro sin id; relaciones mediante __str__. -->
+<h1>Detalle de cobro</h1>
+<dl class="row">
+  <dt class="col-sm-4">Factura</dt><dd class="col-sm-8">{{ object.factura|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Cliente</dt><dd class="col-sm-8">{{ object.factura.cliente|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fecha</dt><dd class="col-sm-8">{{ object.fecha|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Importe</dt><dd class="col-sm-8">{{ object.importe|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'cobro_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}

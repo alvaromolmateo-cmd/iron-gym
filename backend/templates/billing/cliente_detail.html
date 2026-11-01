@@ -1,0 +1,12 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Cliente sin id; relaciones mediante __str__. -->
+<h1>Detalle de cliente</h1>
+<dl class="row">
+  <dt class="col-sm-4">Nombre</dt><dd class="col-sm-8">{{ object.nombre|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Apellidos</dt><dd class="col-sm-8">{{ object.apellidos|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">NIF</dt><dd class="col-sm-8">{{ object.nif|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Correo electrónico</dt><dd class="col-sm-8">{{ object.email|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'cliente_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}

@@ -1,0 +1,12 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Lista de facturas, mostrando su representación textual. -->
+<h1>Lista de facturas</h1>
+<ul class="list-group mb-3">
+{% for object in object_list %}
+  <li class="list-group-item"><a href="{% url 'factura_detail' object.pk %}">{{ object }}</a></li>
+{% empty %}
+  <li class="list-group-item">No hay facturas registrados.</li>
+{% endfor %}
+</ul>
+{% endblock main_content %}

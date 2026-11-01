@@ -1,0 +1,13 @@
+{% extends "common/base_intranet.html" %}
+{% block main_content %}
+<!-- UD3.8a - Campos de Bloqueo sin id; relaciones mediante __str__. -->
+<h1>Detalle de bloqueo</h1>
+<dl class="row">
+  <dt class="col-sm-4">Instalación</dt><dd class="col-sm-8">{{ object.instalacion|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Inicio</dt><dd class="col-sm-8">{{ object.inicio|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Fin</dt><dd class="col-sm-8">{{ object.fin|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Motivo</dt><dd class="col-sm-8">{{ object.motivo|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Creado por</dt><dd class="col-sm-8">{{ object.creado_por|default_if_none:"—" }}</dd>
+</dl>
+<a href="{% url 'bloqueo_list' %}" class="btn btn-secondary">Volver a la lista</a>
+{% endblock main_content %}
