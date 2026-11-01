@@ -1,3 +1,10 @@
-from django.shortcuts import render
+# UD3.7a - Páginas comunes de la aplicación.
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class HomeView(TemplateView):
+    template_name = "common/home.html"
+
+
+class PanelView(TemplateView):
+    template_name = "common/panel.html"
