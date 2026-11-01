@@ -12,6 +12,11 @@ class Cliente(models.Model):
     # UD3.3c - Restricciones de clave única
     class Meta:
         unique_together = [['nif'], ['email']]
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'cliente'
+        verbose_name_plural = 'clientes'
+        # UD3.4f - Ordenación por defecto: apellidos, nombre
+        ordering = ['apellidos', 'nombre']
 
     # UD3.3b - Representación textual del cliente
     def __str__(self):
@@ -30,6 +35,11 @@ class Factura(models.Model):
     # UD3.3c - Restricciones de clave única
     class Meta:
         unique_together = [['numero']]
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'factura'
+        verbose_name_plural = 'facturas'
+        # UD3.4f - Ordenación por defecto: N.º factura
+        ordering = ['numero']
 
     # UD3.3b - Representación textual de la factura
     def __str__(self):
@@ -43,6 +53,12 @@ class Cobro(models.Model):
     fecha = models.DateField(default=timezone.now)
     importe = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
+    class Meta:
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'cobro'
+        verbose_name_plural = 'cobros'
+        # UD3.4f - Ordenación por defecto: fecha descendente
+        ordering = ['-fecha']
 
     # UD3.3b - Representación textual del cobro
     def __str__(self):

@@ -18,6 +18,12 @@ class Perfil(models.Model):
     fecha_alta = models.DateField(default=timezone.now)
     fecha_caducidad = models.DateField(null=True, blank=True)
 
+    class Meta:
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'perfil'
+        verbose_name_plural = 'perfiles'
+        # UD3.4f - Ordenación por defecto: nombre de usuario
+        ordering = ['usuario__username']
 
     # UD3.3b - Representación textual del perfil (Perfil)
     def __str__(self):
@@ -39,6 +45,12 @@ class Instalacion(models.Model):
     capacidad = models.PositiveIntegerField(default=1)
     activa = models.BooleanField(default=True)
 
+    class Meta:
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'instalación'
+        verbose_name_plural = 'instalaciones'
+        # UD3.4f - Ordenación por defecto: nombre
+        ordering = ['nombre']
 
     # UD3.3b - Representación textual de la instalación (Instalacion)
     def __str__(self):
@@ -61,6 +73,11 @@ class Horario(models.Model):
     # UD3.3c - Una instalación solo tiene un horario por día de la semana
     class Meta:
         unique_together = [['instalacion', 'dia_semana']]
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'horario'
+        verbose_name_plural = 'horarios'
+        # UD3.4f - Ordenación por defecto: instalación y día de la semana
+        ordering = ['instalacion__nombre', 'dia_semana']
 
     # UD3.3b - Representación textual del horario (Horario)
     def __str__(self):
@@ -86,6 +103,11 @@ class Reserva(models.Model):
     # UD3.3c - Una instalación no puede reservarse dos veces el mismo día a la misma hora
     class Meta:
         unique_together = [['instalacion', 'fecha', 'hora_inicio']]
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'reserva'
+        verbose_name_plural = 'reservas'
+        # UD3.4f - Ordenación por defecto: fecha descendente y hora de inicio
+        ordering = ['-fecha', 'hora_inicio']
 
     # UD3.3b - Representación textual de la reserva (Reserva)
     def __str__(self):
@@ -104,6 +126,11 @@ class Bloqueo(models.Model):
     # UD3.3c - No se puede registrar dos veces el mismo bloqueo de una instalación
     class Meta:
         unique_together = [['instalacion', 'inicio']]
+        # UD3.4e - Nombre del modelo en el administrador
+        verbose_name = 'bloqueo'
+        verbose_name_plural = 'bloqueos'
+        # UD3.4f - Ordenación por defecto: inicio descendente
+        ordering = ['-inicio']
 
     # UD3.3b - Representación textual del bloqueo (Bloqueo)
     def __str__(self):
