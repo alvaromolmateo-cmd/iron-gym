@@ -1,6 +1,9 @@
 {
   "name": "despliegue",
   "image": "mcr.microsoft.com/devcontainers/php:8.4",
+  "mounts": [
+    "source=iron-gym-despliegue-vendor,target=${containerWorkspaceFolder}/backend-despliegue/vendor,type=volume"
+  ],
   "containerEnv": {
     "XDEBUG_MODE": "off"
   },
@@ -8,7 +11,7 @@
   "portsAttributes": {
     "8000": { "label": "Backend Laravel" }
   },
-  "postCreateCommand": "sudo git config --system --add safe.directory \"${containerWorkspaceFolder}\"",
+  "postCreateCommand": "sudo git config --system --add safe.directory \"${containerWorkspaceFolder}\" && sudo chown -R vscode:vscode backend-despliegue/vendor",
   "customizations": {
     "vscode": {
       "extensions": [
