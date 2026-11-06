@@ -122,7 +122,8 @@ Los nombres CSS son alias locales. Los valores proceden de la tabla oficial
   Ver `REVISION.md` para la comprobación efectuada y sus límites.
 - Foco visible de 2 px; enlace para saltar al contenido; navegación nativa por teclado.
 - La respuesta dinámica usa una región `aria-live="polite"`, atómica. La espera se
-  indica con `aria-busy`; los errores también se anuncian como texto.
+  indica con `aria-busy` en el formulario, fuera de la región viva para no retrasar
+  el anuncio de carga; los errores también se anuncian como texto.
 - Los iconos decorativos se ocultan a lectores de pantalla. Se respeta
   `prefers-reduced-motion`; no hay información que dependa solo del color.
 - Responsive sin alturas fijas de texto; se permite ajuste de línea y zoom.

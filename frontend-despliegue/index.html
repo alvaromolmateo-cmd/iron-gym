@@ -131,7 +131,7 @@
     <section id="hello" aria-labelledby="hello-title">
       <div class="page-heading"><div><p class="eyebrow">Un primer paso</p><h1 id="hello-title">Un saludo a tu manera.</h1><p class="intro">A veces, empezar es tan sencillo como decir hello.<br>Prueba con tu nombre o deja que el saludo sea para todos.</p></div><span class="index">01 / HELLO</span></div>
       <div class="workspace">
-        <form id="greeting-form" class="form-panel">
+        <form id="greeting-form" class="form-panel" aria-busy="false">
           <p class="section-caption">PERSONALIZA TU SALUDO</p>
           <label for="name">Nombre <span>(opcional)</span></label>
           <input id="name" name="name" type="text" autocomplete="given-name" aria-describedby="name-help" placeholder="Por ejemplo, Ana">
@@ -140,7 +140,7 @@
         </form>
         <div class="result-panel">
           <div class="result-top"><span>TU SALUDO</span><span id="state-label">En espera</span></div>
-          <div id="result" class="result-content" role="status" aria-live="polite" aria-atomic="true" aria-busy="false"><span class="state-icon" aria-hidden="true">→</span><h2>Tu saludo empieza aquí.</h2><p>Cuando pulses Saludar, aparecerá en este espacio.</p></div>
+          <div id="result" class="result-content" role="status" aria-live="polite" aria-atomic="true"><span class="state-icon" aria-hidden="true">→</span><h2>Tu saludo empieza aquí.</h2><p>Cuando pulses Saludar, aparecerá en este espacio.</p></div>
           <p class="result-bottom">Algo sencillo, hecho para ti.</p>
         </div>
       </div>
@@ -173,7 +173,7 @@
       clearTimeout(timer);
       const [icon, title, description, label] = states[state];
       result.className = 'result-content ' + state;
-      result.setAttribute('aria-busy', String(state === 'loading'));
+      document.querySelector('#greeting-form').setAttribute('aria-busy', String(state === 'loading'));
       result.querySelector('.state-icon').textContent = icon;
       result.querySelector('h2').textContent = greeting ?? title;
       result.querySelector('p').textContent = description;
