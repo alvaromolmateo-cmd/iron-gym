@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8000
+# Para el contenedor de comprobacion en este equipo, cambia el puerto a 18000.
+
+### Saludo sin nombre
+GET {{baseUrl}}/api/hello
+Accept: application/json
+
+### Saludo con nombre
+GET {{baseUrl}}/api/hello?name=Ana
+Accept: application/json
+
+### Nombre vacio
+GET {{baseUrl}}/api/hello?name=
+Accept: application/json
+
+### Nombre con espacios y acento
+GET {{baseUrl}}/api/hello?name=Ana%20Garc%C3%ADa
+Accept: application/json
+
+### Origen permitido
+GET {{baseUrl}}/api/hello
+Origin: http://localhost:5173
+
+### Origen no permitido: 200 sin Access-Control-Allow-Origin
+GET {{baseUrl}}/api/hello
+Origin: http://web-maliciosa.com
+
+### Preflight: 204
+OPTIONS {{baseUrl}}/api/hello
+Origin: http://localhost:5173
+Access-Control-Request-Method: GET
