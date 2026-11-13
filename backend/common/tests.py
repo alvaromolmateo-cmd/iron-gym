@@ -8,7 +8,9 @@ from django.urls import reverse
 from django.utils import timezone
 
 from billing.models import Cliente, Factura, Cobro
-from core.models import Perfil, Instalacion, Horario, Reserva, Bloqueo
+from core.models import Perfil, Instalacion, Horario, Reserva, Bloqueo, TipoPerfil
+from django.db import IntegrityError, transaction
+from django.db.models.deletion import ProtectedError
 from common import actividadorm as orm
 
 
@@ -32,7 +34,7 @@ class PaginasTests(TestCase):
             cobro = Cobro.objects.create(factura=factura, importe=5)
             perfil = Perfil.objects.create(usuario=usuario, dni=f"D{i}")
             instalacion = Instalacion.objects.create(nombre=f"Pista{i:02}")
-            horario = Horario.objects.create(instalacion=instalacion, dia_semana=0, hora_apertura=time(9), hora_cierre=time(21))
+            horario = Horario.objects.create(instalacion=instalacion, dia_semana_id=0, hora_apertura=time(9), hora_cierre=time(21))
             reserva = Reserva.objects.create(usuario=usuario, instalacion=instalacion, fecha=hoy, hora_inicio=time(10), hora_fin=time(11))
             bloqueo = Bloqueo.objects.create(instalacion=instalacion, inicio=ahora, fin=ahora + timedelta(hours=1), motivo="Limpieza")
         objetos = dict(cliente=cliente, factura=factura, cobro=cobro, perfil=perfil, instalacion=instalacion, horario=horario, reserva=reserva, bloqueo=bloqueo)
@@ -50,6 +52,27 @@ class PaginasTests(TestCase):
                 self.assertEqual(detalle.status_code, 200)
         self.assertContains(self.client.get(reverse("cobro_detail", args=[cobro.pk])), str(cliente))
         self.assertContains(self.client.get(reverse("perfil_detail", args=[perfil.pk])), "Socio")
+
+
+class TablasMaestrasTests(TestCase):
+    def test_tipo_ampliable_y_protegido(self):
+        tipo = TipoPerfil.objects.create(codigo="entrenador", nombre="Entrenador")
+        usuario = User.objects.create_user(username="entrenador")
+        perfil = Perfil.objects.create(usuario=usuario, tipo=tipo, dni="PRUEBA")
+        self.assertIn("Entrenador", str(perfil))
+        self.assertContains(self.client.get(reverse("perfil_detail", args=[perfil.pk])), "Entrenador")
+        with self.assertRaises(ProtectedError):
+            tipo.delete()
+
+    def test_unicidad_individual_de_factura_y_cliente(self):
+        cliente = Cliente.objects.create(nombre="A", apellidos="B", nif="N1", email="a@example.com")
+        Factura.objects.create(cliente=cliente, numero="UNICA", concepto="Prueba")
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Factura.objects.create(cliente=cliente, numero="UNICA", concepto="Otra")
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Cliente.objects.create(nombre="C", apellidos="D", nif="N1", email="b@example.com")
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            Cliente.objects.create(nombre="C", apellidos="D", nif="N2", email="a@example.com")
 
 
 class ORMTests(TestCase):

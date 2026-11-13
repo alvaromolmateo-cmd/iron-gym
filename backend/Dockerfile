@@ -16,5 +16,5 @@ COPY . .
 
 EXPOSE 8000
 
-# UD3.2h Aplica migraciones, recoge estáticos y arranca el servidor accesible desde fuera del contenedor
-CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"]
+# UD3.2h Aplica migraciones y arranca el servidor accesible desde fuera del contenedor
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

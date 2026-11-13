@@ -54,3 +54,19 @@ class BloqueoAdmin(admin.ModelAdmin):
     search_fields = ('instalacion__nombre', 'motivo')
     date_hierarchy = 'inicio'
     preserve_filters = True
+
+
+# UD3.4c - Gestión de las tablas maestras: altas sin modificar código.
+from .models import TipoPerfil, TipoInstalacion, DiaSemana, EstadoReserva
+
+
+@admin.register(TipoPerfil, TipoInstalacion, EstadoReserva)
+class CatalogoAdmin(admin.ModelAdmin):
+    list_display = ('codigo', 'nombre')
+    search_fields = ('codigo', 'nombre')
+
+
+@admin.register(DiaSemana)
+class DiaSemanaAdmin(admin.ModelAdmin):
+    list_display = ('numero', 'nombre')
+    search_fields = ('nombre',)

@@ -8,7 +8,7 @@
   <dt class="col-sm-4">Fecha</dt><dd class="col-sm-8">{{ object.fecha|default_if_none:"—" }}</dd>
   <dt class="col-sm-4">Hora de inicio</dt><dd class="col-sm-8">{{ object.hora_inicio|default_if_none:"—" }}</dd>
   <dt class="col-sm-4">Hora de fin</dt><dd class="col-sm-8">{{ object.hora_fin|default_if_none:"—" }}</dd>
-  <dt class="col-sm-4">Estado</dt><dd class="col-sm-8">{{ object.get_estado_display|default_if_none:"—" }}</dd>
+  <dt class="col-sm-4">Estado</dt><dd class="col-sm-8">{{ object.estado|default_if_none:"—" }}</dd>
   <dt class="col-sm-4">Fecha de creación</dt><dd class="col-sm-8">{{ object.fecha_creacion|default_if_none:"—" }}</dd>
 </dl>
 <a href="{% url 'reserva_list' %}" class="btn btn-secondary">Volver a la lista</a>
