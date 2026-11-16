@@ -1,6 +1,7 @@
 # UD4.2a - Vistas genericas de edicion y redirecciones.
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from common.mixins import CrearActualizarMixin
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
 from .models import Cliente, Factura, Cobro
@@ -52,7 +53,7 @@ class CobroDetailView(DetailView):
 
 
 # UD4.2a - Vista de create de Cliente.
-class ClienteCreateView(CreateView):
+class ClienteCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cliente"
     titulo_actualizacion = "Actualizar cliente"
@@ -67,7 +68,7 @@ class ClienteCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Cliente.
-class ClienteUpdateView(UpdateView):
+class ClienteUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cliente"
     titulo_actualizacion = "Actualizar cliente"
@@ -89,7 +90,7 @@ class ClienteDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Factura.
-class FacturaCreateView(CreateView):
+class FacturaCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear factura"
     titulo_actualizacion = "Actualizar factura"
@@ -104,7 +105,7 @@ class FacturaCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Factura.
-class FacturaUpdateView(UpdateView):
+class FacturaUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear factura"
     titulo_actualizacion = "Actualizar factura"
@@ -126,7 +127,7 @@ class FacturaDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Cobro.
-class CobroCreateView(CreateView):
+class CobroCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"
@@ -141,7 +142,7 @@ class CobroCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Cobro.
-class CobroUpdateView(UpdateView):
+class CobroUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"

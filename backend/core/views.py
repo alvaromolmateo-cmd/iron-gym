@@ -1,6 +1,7 @@
 # UD4.2a - Vistas genericas de edicion y redirecciones.
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from common.mixins import CrearActualizarMixin
 # UD3.7a - Vistas de consulta de core.
 from django.views.generic import ListView, DetailView
 from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
@@ -82,7 +83,7 @@ class BloqueoDetailView(DetailView):
 
 
 # UD4.2a - Vista de create de Perfil.
-class PerfilCreateView(CreateView):
+class PerfilCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear perfil"
     titulo_actualizacion = "Actualizar perfil"
@@ -97,7 +98,7 @@ class PerfilCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Perfil.
-class PerfilUpdateView(UpdateView):
+class PerfilUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear perfil"
     titulo_actualizacion = "Actualizar perfil"
@@ -119,7 +120,7 @@ class PerfilDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Instalacion.
-class InstalacionCreateView(CreateView):
+class InstalacionCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear instalacion"
     titulo_actualizacion = "Actualizar instalacion"
@@ -134,7 +135,7 @@ class InstalacionCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Instalacion.
-class InstalacionUpdateView(UpdateView):
+class InstalacionUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear instalacion"
     titulo_actualizacion = "Actualizar instalacion"
@@ -156,7 +157,7 @@ class InstalacionDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Horario.
-class HorarioCreateView(CreateView):
+class HorarioCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear horario"
     titulo_actualizacion = "Actualizar horario"
@@ -171,7 +172,7 @@ class HorarioCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Horario.
-class HorarioUpdateView(UpdateView):
+class HorarioUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear horario"
     titulo_actualizacion = "Actualizar horario"
@@ -193,7 +194,7 @@ class HorarioDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Reserva.
-class ReservaCreateView(CreateView):
+class ReservaCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear reserva"
     titulo_actualizacion = "Actualizar reserva"
@@ -208,7 +209,7 @@ class ReservaCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Reserva.
-class ReservaUpdateView(UpdateView):
+class ReservaUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear reserva"
     titulo_actualizacion = "Actualizar reserva"
@@ -230,7 +231,7 @@ class ReservaDeleteView(DeleteView):
 
 
 # UD4.2a - Vista de create de Bloqueo.
-class BloqueoCreateView(CreateView):
+class BloqueoCreateView(CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear bloqueo"
     titulo_actualizacion = "Actualizar bloqueo"
@@ -245,7 +246,7 @@ class BloqueoCreateView(CreateView):
 
 
 # UD4.2a - Vista de update de Bloqueo.
-class BloqueoUpdateView(UpdateView):
+class BloqueoUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear bloqueo"
     titulo_actualizacion = "Actualizar bloqueo"
