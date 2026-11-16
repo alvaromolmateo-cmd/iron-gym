@@ -1,14 +1,16 @@
-# UD4.2a - Vistas genericas de edicion y redirecciones.
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
-from .mixins import CobroMixin
-# UD4.2i - Ordenacion opcional.
-from common.mixins import OrdenacionMixin
-# UD4.3a - Formularios compartidos.
+# UD4.3a - Formularios definidos en la app, siguiendo el apartado 4.1 del PDF.
 from .forms import ClienteForm, FacturaForm, CobroForm
+# UD4.2i - Ordenacion opcional de los listados.
+from common.mixins import OrdenacionMixin
+# UD4.2g - Validacion reutilizada en los cobros.
+from .mixins import CobroMixin
+# UD4.2d / UD4.2e / UD4.2f - Mixins compartidos por las vistas de mantenimiento.
+from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
+# UD4.2a - Vistas de edicion genericas y redirecciones (PDF, apartados 3.1-3.4).
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Cliente, Factura, Cobro
 
 
@@ -57,8 +59,10 @@ class CobroDetailView(DetailView):
     template_name = "billing/cobro_detail.html"
 
 
-# UD4.2a - Vista de create de Cliente.
+# UD4.2a - CreateView de Cliente, con formulario generado por Django.
 class ClienteCreateView(CrearActualizarMixin, CreateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} creado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cliente"
     titulo_actualizacion = "Actualizar cliente"
@@ -73,8 +77,10 @@ class ClienteCreateView(CrearActualizarMixin, CreateView):
         return reverse_lazy("cliente_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de update de Cliente.
+# UD4.2a - UpdateView de Cliente, con formulario generado por Django.
 class ClienteUpdateView(CrearActualizarMixin, UpdateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} actualizado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cliente"
     titulo_actualizacion = "Actualizar cliente"
@@ -89,7 +95,7 @@ class ClienteUpdateView(CrearActualizarMixin, UpdateView):
         return reverse_lazy("cliente_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de delete de Cliente.
+# UD4.2a - DeleteView de Cliente, con regreso a su listado.
 class ClienteDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cliente"
@@ -99,8 +105,10 @@ class ClienteDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
     success_url = reverse_lazy("cliente_list")
 
 
-# UD4.2a - Vista de create de Factura.
+# UD4.2a - CreateView de Factura, con formulario generado por Django.
 class FacturaCreateView(CrearActualizarMixin, CreateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} creado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear factura"
     titulo_actualizacion = "Actualizar factura"
@@ -115,8 +123,10 @@ class FacturaCreateView(CrearActualizarMixin, CreateView):
         return reverse_lazy("factura_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de update de Factura.
+# UD4.2a - UpdateView de Factura, con formulario generado por Django.
 class FacturaUpdateView(CrearActualizarMixin, UpdateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} actualizado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear factura"
     titulo_actualizacion = "Actualizar factura"
@@ -131,7 +141,7 @@ class FacturaUpdateView(CrearActualizarMixin, UpdateView):
         return reverse_lazy("factura_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de delete de Factura.
+# UD4.2a - DeleteView de Factura, con regreso a su listado.
 class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar factura"
@@ -141,8 +151,10 @@ class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
     success_url = reverse_lazy("factura_list")
 
 
-# UD4.2a - Vista de create de Cobro.
+# UD4.2a - CreateView de Cobro, con formulario generado por Django.
 class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} creado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"
@@ -157,8 +169,10 @@ class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
         return reverse_lazy("cobro_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de update de Cobro.
+# UD4.2a - UpdateView de Cobro, con formulario generado por Django.
 class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
+    # UD4.4a - Mensaje tras guardar correctamente.
+    success_message = "{} actualizado correctamente."
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"
@@ -173,7 +187,7 @@ class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
         return reverse_lazy("cobro_update", kwargs={"pk": self.object.pk})
 
 
-# UD4.2a - Vista de delete de Cobro.
+# UD4.2a - DeleteView de Cobro, con regreso a su listado.
 class CobroDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cobro"
