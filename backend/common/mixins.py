@@ -10,3 +10,11 @@ class CrearActualizarMixin:
         context['titulo_actualizacion'] = self.titulo_actualizacion
         context['url_borrado'] = self.url_borrado
         return context
+
+# UD4.2e - Mixin compartido.
+class ConfirmarBorradoMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = self.titulo
+        context['mensaje_confirmacion'] = self.mensaje_confirmacion
+        return context
