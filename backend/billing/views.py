@@ -53,6 +53,10 @@ class CobroDetailView(DetailView):
 
 # UD4.2a - Vista de create de Cliente.
 class ClienteCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear cliente"
+    titulo_actualizacion = "Actualizar cliente"
+    url_borrado = None
     model = Cliente
     fields = ['nombre', 'apellidos', 'nif', 'email']
     template_name = "base_create_update.html"
@@ -64,6 +68,10 @@ class ClienteCreateView(CreateView):
 
 # UD4.2a - Vista de update de Cliente.
 class ClienteUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear cliente"
+    titulo_actualizacion = "Actualizar cliente"
+    url_borrado = 'cliente_delete'
     model = Cliente
     fields = ['nombre', 'apellidos', 'nif', 'email']
     template_name = "base_create_update.html"
@@ -82,6 +90,10 @@ class ClienteDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Factura.
 class FacturaCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear factura"
+    titulo_actualizacion = "Actualizar factura"
+    url_borrado = None
     model = Factura
     fields = ['cliente', 'numero', 'concepto', 'fecha', 'total']
     template_name = "base_create_update.html"
@@ -93,6 +105,10 @@ class FacturaCreateView(CreateView):
 
 # UD4.2a - Vista de update de Factura.
 class FacturaUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear factura"
+    titulo_actualizacion = "Actualizar factura"
+    url_borrado = 'factura_delete'
     model = Factura
     fields = ['cliente', 'numero', 'concepto', 'fecha', 'total']
     template_name = "base_create_update.html"
@@ -111,6 +127,10 @@ class FacturaDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Cobro.
 class CobroCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear cobro"
+    titulo_actualizacion = "Actualizar cobro"
+    url_borrado = None
     model = Cobro
     fields = ['factura', 'fecha', 'importe']
     template_name = "base_create_update.html"
@@ -122,6 +142,10 @@ class CobroCreateView(CreateView):
 
 # UD4.2a - Vista de update de Cobro.
 class CobroUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear cobro"
+    titulo_actualizacion = "Actualizar cobro"
+    url_borrado = 'cobro_delete'
     model = Cobro
     fields = ['factura', 'fecha', 'importe']
     template_name = "base_create_update.html"

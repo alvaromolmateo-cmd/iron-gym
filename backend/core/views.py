@@ -83,6 +83,10 @@ class BloqueoDetailView(DetailView):
 
 # UD4.2a - Vista de create de Perfil.
 class PerfilCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear perfil"
+    titulo_actualizacion = "Actualizar perfil"
+    url_borrado = None
     model = Perfil
     fields = ['usuario', 'tipo', 'dni', 'telefono', 'fecha_alta', 'fecha_caducidad']
     template_name = "base_create_update.html"
@@ -94,6 +98,10 @@ class PerfilCreateView(CreateView):
 
 # UD4.2a - Vista de update de Perfil.
 class PerfilUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear perfil"
+    titulo_actualizacion = "Actualizar perfil"
+    url_borrado = 'perfil_delete'
     model = Perfil
     fields = ['usuario', 'tipo', 'dni', 'telefono', 'fecha_alta', 'fecha_caducidad']
     template_name = "base_create_update.html"
@@ -112,6 +120,10 @@ class PerfilDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Instalacion.
 class InstalacionCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear instalacion"
+    titulo_actualizacion = "Actualizar instalacion"
+    url_borrado = None
     model = Instalacion
     fields = ['nombre', 'tipo', 'descripcion', 'capacidad', 'activa']
     template_name = "base_create_update.html"
@@ -123,6 +135,10 @@ class InstalacionCreateView(CreateView):
 
 # UD4.2a - Vista de update de Instalacion.
 class InstalacionUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear instalacion"
+    titulo_actualizacion = "Actualizar instalacion"
+    url_borrado = 'instalacion_delete'
     model = Instalacion
     fields = ['nombre', 'tipo', 'descripcion', 'capacidad', 'activa']
     template_name = "base_create_update.html"
@@ -141,6 +157,10 @@ class InstalacionDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Horario.
 class HorarioCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear horario"
+    titulo_actualizacion = "Actualizar horario"
+    url_borrado = None
     model = Horario
     fields = ['instalacion', 'dia_semana', 'hora_apertura', 'hora_cierre', 'duracion_franja']
     template_name = "base_create_update.html"
@@ -152,6 +172,10 @@ class HorarioCreateView(CreateView):
 
 # UD4.2a - Vista de update de Horario.
 class HorarioUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear horario"
+    titulo_actualizacion = "Actualizar horario"
+    url_borrado = 'horario_delete'
     model = Horario
     fields = ['instalacion', 'dia_semana', 'hora_apertura', 'hora_cierre', 'duracion_franja']
     template_name = "base_create_update.html"
@@ -170,6 +194,10 @@ class HorarioDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Reserva.
 class ReservaCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear reserva"
+    titulo_actualizacion = "Actualizar reserva"
+    url_borrado = None
     model = Reserva
     fields = ['usuario', 'instalacion', 'fecha', 'hora_inicio', 'hora_fin', 'estado']
     template_name = "base_create_update.html"
@@ -181,6 +209,10 @@ class ReservaCreateView(CreateView):
 
 # UD4.2a - Vista de update de Reserva.
 class ReservaUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear reserva"
+    titulo_actualizacion = "Actualizar reserva"
+    url_borrado = 'reserva_delete'
     model = Reserva
     fields = ['usuario', 'instalacion', 'fecha', 'hora_inicio', 'hora_fin', 'estado']
     template_name = "base_create_update.html"
@@ -199,6 +231,10 @@ class ReservaDeleteView(DeleteView):
 
 # UD4.2a - Vista de create de Bloqueo.
 class BloqueoCreateView(CreateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear bloqueo"
+    titulo_actualizacion = "Actualizar bloqueo"
+    url_borrado = None
     model = Bloqueo
     fields = ['instalacion', 'inicio', 'fin', 'motivo', 'creado_por']
     template_name = "base_create_update.html"
@@ -210,6 +246,10 @@ class BloqueoCreateView(CreateView):
 
 # UD4.2a - Vista de update de Bloqueo.
 class BloqueoUpdateView(UpdateView):
+    # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
+    titulo_creacion = "Crear bloqueo"
+    titulo_actualizacion = "Actualizar bloqueo"
+    url_borrado = 'bloqueo_delete'
     model = Bloqueo
     fields = ['instalacion', 'inicio', 'fin', 'motivo', 'creado_por']
     template_name = "base_create_update.html"
