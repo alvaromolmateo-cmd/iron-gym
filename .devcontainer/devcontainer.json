@@ -1,15 +1,19 @@
 {
   "name": "despliegue",
   "image": "mcr.microsoft.com/devcontainers/php:8.4",
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": { "version": "lts" }
+  },
   "mounts": [
     "source=iron-gym-despliegue-vendor,target=${containerWorkspaceFolder}/backend-despliegue/vendor,type=volume"
   ],
   "containerEnv": {
     "XDEBUG_MODE": "off"
   },
-  "forwardPorts": [8000],
+  "forwardPorts": [8000, 5173],
   "portsAttributes": {
-    "8000": { "label": "Backend Laravel" }
+    "8000": { "label": "Backend Laravel" },
+    "5173": { "label": "Frontend Vue" }
   },
   "postCreateCommand": "sudo git config --system --add safe.directory \"${containerWorkspaceFolder}\" && sudo chown -R vscode:vscode backend-despliegue/vendor",
   "customizations": {
@@ -17,7 +21,8 @@
       "extensions": [
         "laravel.vscode-laravel",
         "bmewburn.vscode-intelephense-client",
-        "humao.rest-client"
+        "humao.rest-client",
+        "Vue.volar"
       ]
     }
   }
