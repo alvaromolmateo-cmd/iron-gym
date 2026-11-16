@@ -5,6 +5,8 @@ from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoPr
 from .mixins import HorarioMixin, BloqueoMixin
 # UD4.2i - Ordenacion opcional.
 from common.mixins import OrdenacionMixin
+# UD4.3a - Formularios compartidos.
+from .forms import PerfilForm, InstalacionForm, HorarioForm, ReservaForm, BloqueoForm
 # UD3.7a - Vistas de consulta de core.
 from django.views.generic import ListView, DetailView
 from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
@@ -92,7 +94,8 @@ class PerfilCreateView(CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar perfil"
     url_borrado = None
     model = Perfil
-    fields = ['usuario', 'tipo', 'dni', 'telefono', 'fecha_alta', 'fecha_caducidad']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = PerfilForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -107,7 +110,8 @@ class PerfilUpdateView(CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar perfil"
     url_borrado = 'perfil_delete'
     model = Perfil
-    fields = ['usuario', 'tipo', 'dni', 'telefono', 'fecha_alta', 'fecha_caducidad']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = PerfilForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -132,7 +136,8 @@ class InstalacionCreateView(CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar instalacion"
     url_borrado = None
     model = Instalacion
-    fields = ['nombre', 'tipo', 'descripcion', 'capacidad', 'activa']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = InstalacionForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -147,7 +152,8 @@ class InstalacionUpdateView(CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar instalacion"
     url_borrado = 'instalacion_delete'
     model = Instalacion
-    fields = ['nombre', 'tipo', 'descripcion', 'capacidad', 'activa']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = InstalacionForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -172,7 +178,8 @@ class HorarioCreateView(HorarioMixin, CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar horario"
     url_borrado = None
     model = Horario
-    fields = ['instalacion', 'dia_semana', 'hora_apertura', 'hora_cierre', 'duracion_franja']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = HorarioForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -187,7 +194,8 @@ class HorarioUpdateView(HorarioMixin, CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar horario"
     url_borrado = 'horario_delete'
     model = Horario
-    fields = ['instalacion', 'dia_semana', 'hora_apertura', 'hora_cierre', 'duracion_franja']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = HorarioForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -212,7 +220,8 @@ class ReservaCreateView(CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar reserva"
     url_borrado = None
     model = Reserva
-    fields = ['usuario', 'instalacion', 'fecha', 'hora_inicio', 'hora_fin', 'estado']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = ReservaForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -227,7 +236,8 @@ class ReservaUpdateView(CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar reserva"
     url_borrado = 'reserva_delete'
     model = Reserva
-    fields = ['usuario', 'instalacion', 'fecha', 'hora_inicio', 'hora_fin', 'estado']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = ReservaForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -252,7 +262,8 @@ class BloqueoCreateView(BloqueoMixin, CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar bloqueo"
     url_borrado = None
     model = Bloqueo
-    fields = ['instalacion', 'inicio', 'fin', 'motivo', 'creado_por']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = BloqueoForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -267,7 +278,8 @@ class BloqueoUpdateView(BloqueoMixin, CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar bloqueo"
     url_borrado = 'bloqueo_delete'
     model = Bloqueo
-    fields = ['instalacion', 'inicio', 'fin', 'motivo', 'creado_por']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = BloqueoForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.

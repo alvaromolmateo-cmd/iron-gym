@@ -5,6 +5,8 @@ from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoPr
 from .mixins import CobroMixin
 # UD4.2i - Ordenacion opcional.
 from common.mixins import OrdenacionMixin
+# UD4.3a - Formularios compartidos.
+from .forms import ClienteForm, FacturaForm, CobroForm
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
 from .models import Cliente, Factura, Cobro
@@ -62,7 +64,8 @@ class ClienteCreateView(CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar cliente"
     url_borrado = None
     model = Cliente
-    fields = ['nombre', 'apellidos', 'nif', 'email']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = ClienteForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -77,7 +80,8 @@ class ClienteUpdateView(CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar cliente"
     url_borrado = 'cliente_delete'
     model = Cliente
-    fields = ['nombre', 'apellidos', 'nif', 'email']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = ClienteForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -102,7 +106,8 @@ class FacturaCreateView(CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar factura"
     url_borrado = None
     model = Factura
-    fields = ['cliente', 'numero', 'concepto', 'fecha', 'total']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = FacturaForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -117,7 +122,8 @@ class FacturaUpdateView(CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar factura"
     url_borrado = 'factura_delete'
     model = Factura
-    fields = ['cliente', 'numero', 'concepto', 'fecha', 'total']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = FacturaForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -142,7 +148,8 @@ class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
     titulo_actualizacion = "Actualizar cobro"
     url_borrado = None
     model = Cobro
-    fields = ['factura', 'fecha', 'importe']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = CobroForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
@@ -157,7 +164,8 @@ class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
     titulo_actualizacion = "Actualizar cobro"
     url_borrado = 'cobro_delete'
     model = Cobro
-    fields = ['factura', 'fecha', 'importe']
+    # UD4.3a - form_class sustituye a fields en ambas vistas.
+    form_class = CobroForm
     template_name = "base_create_update.html"
 
     # UD4.2a - Tras guardar, volver a la edicion del objeto.
