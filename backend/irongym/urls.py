@@ -37,6 +37,31 @@ urlpatterns = [
     # UD3.7b - Rutas de Bloqueo.
     path("bloqueo_list/", core_views.BloqueoListView.as_view(), name="bloqueo_list"),
     path("bloqueo_detail/<int:pk>/", core_views.BloqueoDetailView.as_view(), name="bloqueo_detail"),
+    # UD4.2b - Rutas de creacion, actualizacion y borrado.
+    path("cliente_create/", billing_views.ClienteCreateView.as_view(), name="cliente_create"),
+    path("cliente_update/<int:pk>/", billing_views.ClienteUpdateView.as_view(), name="cliente_update"),
+    path("cliente_delete/<int:pk>/", billing_views.ClienteDeleteView.as_view(), name="cliente_delete"),
+    path("factura_create/", billing_views.FacturaCreateView.as_view(), name="factura_create"),
+    path("factura_update/<int:pk>/", billing_views.FacturaUpdateView.as_view(), name="factura_update"),
+    path("factura_delete/<int:pk>/", billing_views.FacturaDeleteView.as_view(), name="factura_delete"),
+    path("cobro_create/", billing_views.CobroCreateView.as_view(), name="cobro_create"),
+    path("cobro_update/<int:pk>/", billing_views.CobroUpdateView.as_view(), name="cobro_update"),
+    path("cobro_delete/<int:pk>/", billing_views.CobroDeleteView.as_view(), name="cobro_delete"),
+    path("perfil_create/", core_views.PerfilCreateView.as_view(), name="perfil_create"),
+    path("perfil_update/<int:pk>/", core_views.PerfilUpdateView.as_view(), name="perfil_update"),
+    path("perfil_delete/<int:pk>/", core_views.PerfilDeleteView.as_view(), name="perfil_delete"),
+    path("instalacion_create/", core_views.InstalacionCreateView.as_view(), name="instalacion_create"),
+    path("instalacion_update/<int:pk>/", core_views.InstalacionUpdateView.as_view(), name="instalacion_update"),
+    path("instalacion_delete/<int:pk>/", core_views.InstalacionDeleteView.as_view(), name="instalacion_delete"),
+    path("horario_create/", core_views.HorarioCreateView.as_view(), name="horario_create"),
+    path("horario_update/<int:pk>/", core_views.HorarioUpdateView.as_view(), name="horario_update"),
+    path("horario_delete/<int:pk>/", core_views.HorarioDeleteView.as_view(), name="horario_delete"),
+    path("reserva_create/", core_views.ReservaCreateView.as_view(), name="reserva_create"),
+    path("reserva_update/<int:pk>/", core_views.ReservaUpdateView.as_view(), name="reserva_update"),
+    path("reserva_delete/<int:pk>/", core_views.ReservaDeleteView.as_view(), name="reserva_delete"),
+    path("bloqueo_create/", core_views.BloqueoCreateView.as_view(), name="bloqueo_create"),
+    path("bloqueo_update/<int:pk>/", core_views.BloqueoUpdateView.as_view(), name="bloqueo_update"),
+    path("bloqueo_delete/<int:pk>/", core_views.BloqueoDeleteView.as_view(), name="bloqueo_delete"),
 ]
 
 # UD3.2e - Servir media solo en desarrollo.
