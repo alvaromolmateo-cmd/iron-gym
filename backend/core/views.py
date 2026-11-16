@@ -2,6 +2,7 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
+from .mixins import HorarioMixin, BloqueoMixin
 # UD3.7a - Vistas de consulta de core.
 from django.views.generic import ListView, DetailView
 from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
@@ -163,7 +164,7 @@ class InstalacionDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, Delete
 
 
 # UD4.2a - Vista de create de Horario.
-class HorarioCreateView(CrearActualizarMixin, CreateView):
+class HorarioCreateView(HorarioMixin, CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear horario"
     titulo_actualizacion = "Actualizar horario"
@@ -178,7 +179,7 @@ class HorarioCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - Vista de update de Horario.
-class HorarioUpdateView(CrearActualizarMixin, UpdateView):
+class HorarioUpdateView(HorarioMixin, CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear horario"
     titulo_actualizacion = "Actualizar horario"
@@ -243,7 +244,7 @@ class ReservaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - Vista de create de Bloqueo.
-class BloqueoCreateView(CrearActualizarMixin, CreateView):
+class BloqueoCreateView(BloqueoMixin, CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear bloqueo"
     titulo_actualizacion = "Actualizar bloqueo"
@@ -258,7 +259,7 @@ class BloqueoCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - Vista de update de Bloqueo.
-class BloqueoUpdateView(CrearActualizarMixin, UpdateView):
+class BloqueoUpdateView(BloqueoMixin, CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear bloqueo"
     titulo_actualizacion = "Actualizar bloqueo"
