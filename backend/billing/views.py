@@ -3,13 +3,15 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
 from .mixins import CobroMixin
+# UD4.2i - Ordenacion opcional.
+from common.mixins import OrdenacionMixin
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
 from .models import Cliente, Factura, Cobro
 
 
 # UD3.7a - Lista de Cliente.
-class ClienteListView(ListView):
+class ClienteListView(OrdenacionMixin, ListView):
     model = Cliente
     template_name = "billing/cliente_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -24,7 +26,7 @@ class ClienteDetailView(DetailView):
 
 
 # UD3.7a - Lista de Factura.
-class FacturaListView(ListView):
+class FacturaListView(OrdenacionMixin, ListView):
     model = Factura
     template_name = "billing/factura_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -39,7 +41,7 @@ class FacturaDetailView(DetailView):
 
 
 # UD3.7a - Lista de Cobro.
-class CobroListView(ListView):
+class CobroListView(OrdenacionMixin, ListView):
     model = Cobro
     template_name = "billing/cobro_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.

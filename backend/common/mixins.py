@@ -30,3 +30,14 @@ class BorradoProtegidoMixin:
                 'Existen dependencias para el objeto {}. Elimine antes dichas dependencias.'.format(self.object),
             )
             return HttpResponseRedirect(self.get_success_url())
+
+# UD4.2i - Mixin compartido.
+class OrdenacionMixin:
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordering = self.request.GET.get('ordering')
+        if ordering == 'asc':
+            return queryset.order_by('id')
+        if ordering == 'desc':
+            return queryset.order_by('-id')
+        return queryset

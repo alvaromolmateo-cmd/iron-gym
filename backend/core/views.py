@@ -3,13 +3,15 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
 from .mixins import HorarioMixin, BloqueoMixin
+# UD4.2i - Ordenacion opcional.
+from common.mixins import OrdenacionMixin
 # UD3.7a - Vistas de consulta de core.
 from django.views.generic import ListView, DetailView
 from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
 
 
 # UD3.7a - Lista de Perfil.
-class PerfilListView(ListView):
+class PerfilListView(OrdenacionMixin, ListView):
     model = Perfil
     template_name = "core/perfil_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -24,7 +26,7 @@ class PerfilDetailView(DetailView):
 
 
 # UD3.7a - Lista de Instalacion.
-class InstalacionListView(ListView):
+class InstalacionListView(OrdenacionMixin, ListView):
     model = Instalacion
     template_name = "core/instalacion_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -39,7 +41,7 @@ class InstalacionDetailView(DetailView):
 
 
 # UD3.7a - Lista de Horario.
-class HorarioListView(ListView):
+class HorarioListView(OrdenacionMixin, ListView):
     model = Horario
     template_name = "core/horario_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -54,7 +56,7 @@ class HorarioDetailView(DetailView):
 
 
 # UD3.7a - Lista de Reserva.
-class ReservaListView(ListView):
+class ReservaListView(OrdenacionMixin, ListView):
     model = Reserva
     template_name = "core/reserva_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
@@ -69,7 +71,7 @@ class ReservaDetailView(DetailView):
 
 
 # UD3.7a - Lista de Bloqueo.
-class BloqueoListView(ListView):
+class BloqueoListView(OrdenacionMixin, ListView):
     model = Bloqueo
     template_name = "core/bloqueo_list.html"
     # UD3.8b - Diez registros por página, con desempate por id.
