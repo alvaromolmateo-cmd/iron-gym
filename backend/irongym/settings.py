@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+# UD4.4a - Etiqueta de los mensajes de error compatible con Bootstrap.
+from django.contrib.messages import constants as messages
 
 # UD3.2e - Directorio base y rutas con os.path, siguiendo los apuntes.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # UD4.4b - Formularios Crispy con las plantillas Bootstrap 5 del PDF.
+    'crispy_forms',
+    'crispy_bootstrap5',
     # UD3.2f Apps del proyecto
     'common',   # sin funcionalidad, por el momento
     'core',     # parte del proyecto intermodular (Iron Gym)
@@ -134,6 +139,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# UD4.4a - Mensajes necesarios para las validaciones de UD4.2.
-from django.contrib.messages import constants as messages
+# UD4.4a - Configuración necesaria para los errores de UD4.2f y UD4.2g.
 MESSAGE_TAGS = {messages.ERROR: 'danger'}
+
+# UD4.4b - Pack de plantillas indicado en el apartado 6.1 del PDF.
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
