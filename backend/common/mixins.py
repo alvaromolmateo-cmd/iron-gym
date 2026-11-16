@@ -18,3 +18,15 @@ class ConfirmarBorradoMixin:
         context['titulo'] = self.titulo
         context['mensaje_confirmacion'] = self.mensaje_confirmacion
         return context
+
+# UD4.2f - Mixin compartido.
+class BorradoProtegidoMixin:
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except ProtectedError:
+            messages.error(
+                self.request,
+                'Existen dependencias para el objeto {}. Elimine antes dichas dependencias.'.format(self.object),
+            )
+            return HttpResponseRedirect(self.get_success_url())

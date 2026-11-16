@@ -1,7 +1,7 @@
 # UD4.2a - Vistas genericas de edicion y redirecciones.
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin
+from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
 from .models import Cliente, Factura, Cobro
@@ -83,7 +83,7 @@ class ClienteUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Cliente.
-class ClienteDeleteView(ConfirmarBorradoMixin, DeleteView):
+class ClienteDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cliente"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -123,7 +123,7 @@ class FacturaUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Factura.
-class FacturaDeleteView(ConfirmarBorradoMixin, DeleteView):
+class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar factura"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -163,7 +163,7 @@ class CobroUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Cobro.
-class CobroDeleteView(ConfirmarBorradoMixin, DeleteView):
+class CobroDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cobro"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"

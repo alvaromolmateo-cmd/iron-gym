@@ -1,7 +1,7 @@
 # UD4.2a - Vistas genericas de edicion y redirecciones.
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin
+from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
 # UD3.7a - Vistas de consulta de core.
 from django.views.generic import ListView, DetailView
 from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
@@ -113,7 +113,7 @@ class PerfilUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Perfil.
-class PerfilDeleteView(ConfirmarBorradoMixin, DeleteView):
+class PerfilDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar perfil"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -153,7 +153,7 @@ class InstalacionUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Instalacion.
-class InstalacionDeleteView(ConfirmarBorradoMixin, DeleteView):
+class InstalacionDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar instalacion"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -193,7 +193,7 @@ class HorarioUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Horario.
-class HorarioDeleteView(ConfirmarBorradoMixin, DeleteView):
+class HorarioDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar horario"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -233,7 +233,7 @@ class ReservaUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Reserva.
-class ReservaDeleteView(ConfirmarBorradoMixin, DeleteView):
+class ReservaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar reserva"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
@@ -273,7 +273,7 @@ class BloqueoUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - Vista de delete de Bloqueo.
-class BloqueoDeleteView(ConfirmarBorradoMixin, DeleteView):
+class BloqueoDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar bloqueo"
     mensaje_confirmacion = "Confirma que deseas eliminar este objeto:"
