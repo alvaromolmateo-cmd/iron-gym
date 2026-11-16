@@ -1,0 +1,17 @@
+/* Carbon White: valores documentados en DESIGN.md. */
+:root {
+      --color-primary:#0f62fe; --color-primary-hover:#0050e6; --color-primary-active:#002d9c;
+      --color-on-primary:#fff; --color-surface:#fff; --color-layer:#f4f4f4;
+      --color-on-surface:#161616; --color-secondary:#525252; --color-error:#da1e28;
+      --color-success:#198038; --color-border:#8d8d8d; --color-divider:#e0e0e0;
+      --color-disabled:#c6c6c6; --color-on-disabled:#8d8d8d; --color-focus:#0f62fe;
+      --space-xs:4px; --space-s:8px; --space-m:16px; --space-24:24px;
+      --space-l:32px; --space-48:48px; --space-64:64px; --space-96:96px;
+      --radius:0; --font:'IBM Plex Sans',Arial,sans-serif;
+      --text-small:12px; --text-label:14px; --text-body:16px; --text-section:20px;
+      --text-title:42px; --text-display:64px;
+      --font-family: var(--font);
+      --font-size-title: var(--text-title);
+      --font-size-body: var(--text-body);
+      --radius-m: var(--radius);
+    }

@@ -1,7 +1,7 @@
 # DESIGN.md — Iron Gym / Hello
 
 Ficha de trabajo de Actividades Interfaces 2. Consulta de fuentes: 6 de noviembre de 2026.
-El boceto es `index.html`: HTML, CSS y JavaScript sin dependencias de ejecución.
+El boceto original se conserva en `boceto.html`: HTML, CSS y JavaScript sin dependencias de ejecución.
 Simula las respuestas; la conexión real a la API corresponde a Frontend 2.
 
 ## Guía elegida
@@ -144,3 +144,12 @@ forma consistente sin localizar números repetidos por todo el código.
 Una empresa comparte estas reglas para reducir inconsistencias y trabajo duplicado.
 El Markdown permite versionar, revisar y reutilizar decisiones en prompts y código.
 La revisión de esta actividad y las correcciones concretas quedan en `REVISION.md`.
+
+## Implementación Frontend 2
+
+La aplicación Vue usa estos valores en `src/assets/tokens.css` y los estilos en
+`src/assets/base.css`. `index.html` es ahora el punto de entrada de Vite.
+Las rutas Inicio y Hello sustituyen la navegación por hashes. El servicio realiza
+peticiones reales; la galería de simulaciones permanece solo en `boceto.html`.
+Los alias exigidos por la práctica (`--font-family`, `--font-size-title`,
+`--font-size-body` y `--radius-m`) reutilizan los tokens del diseño original.
