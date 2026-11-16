@@ -2,6 +2,7 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from common.mixins import CrearActualizarMixin, ConfirmarBorradoMixin, BorradoProtegidoMixin
+from .mixins import CobroMixin
 # UD3.7a - Vistas de consulta de billing.
 from django.views.generic import ListView, DetailView
 from .models import Cliente, Factura, Cobro
@@ -133,7 +134,7 @@ class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - Vista de create de Cobro.
-class CobroCreateView(CrearActualizarMixin, CreateView):
+class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"
@@ -148,7 +149,7 @@ class CobroCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - Vista de update de Cobro.
-class CobroUpdateView(CrearActualizarMixin, UpdateView):
+class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
     # UD4.2c - Variables de la plantilla, enviadas por el mixin de UD4.2d.
     titulo_creacion = "Crear cobro"
     titulo_actualizacion = "Actualizar cobro"
