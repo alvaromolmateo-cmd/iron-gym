@@ -1,186 +1,59 @@
-# Iron Gym
+﻿# Iron Gym
 
-Aplicación web de gestión y reserva de instalaciones deportivas para un centro con varias pistas o espacios.
+## Descripción
 
-Proyecto de fin de grado superior de Desarrollo de Aplicaciones Web.
-
-## Idea
-
-Un centro deportivo necesita que sus socios puedan reservar las instalaciones sin llamadas ni papel, y que el personal pueda controlar horarios, bloqueos y ocupación desde un único sitio. Iron Gym cubre las dos partes en la misma aplicación.
-
-## Funcionalidad prevista
-
-### Usuarios
-
-- Registro e inicio de sesión
-- Consulta de instalaciones y de sus horarios disponibles
-- Creación de reservas
-- Gestión de las próximas reservas propias
-- Comprobación de disponibilidad para que una misma instalación no se reserve dos veces en el mismo horario
-
-### Administración
-
-- Gestión de instalaciones
-- Gestión de horarios
-- Gestión de usuarios
-- Gestión de reservas
-- Bloqueo de franjas por mantenimiento
-
-La interfaz está pensada para móvil y para ordenador.
-
-## Objetivo técnico
-
-Desarrollar una aplicación completa con frontend, backend y base de datos relacional, incluyendo:
-
-- Autenticación
-- Permisos distintos según el tipo de usuario
-- Validación de datos
-- Despliegue
-
-## Ampliaciones si el tiempo lo permite
-
-- Confirmaciones por correo
-- Estadísticas de ocupación
+Iron Gym será una aplicación web para gestionar las reservas de un centro deportivo.
+Resolverá la organización manual de la disponibilidad de pistas y salas.
+Los socios podrán consultar las instalaciones y los horarios disponibles.
+Podrán realizar y consultar sus reservas desde la web.
+El personal del centro gestionará las instalaciones, los horarios y los socios.
+También podrá bloquear horarios cuando una instalación no esté disponible.
+El objetivo será centralizar la información y evitar reservas incompatibles.
 
 ## Tecnologías
 
-| Capa | Decisión |
-| --- | --- |
-| Frontend | HTML, CSS y JavaScript con Vite |
-| Backend | Python con Django 5.2 (LTS) |
-| API | Django REST Framework |
-| Base de datos | SQLite en desarrollo; motor de producción por determinar |
+### Guía de estilo / diseño
 
-Sobre el backend: se usa Django porque es lo que se trabaja este curso en clase y trae de serie el ORM, la autenticación y el panel de administración. Se ha elegido la versión 5.2 por ser la última LTS (soporte hasta abril de 2028). El razonamiento completo está en la propuesta del Hito 0.
+Se utilizará un diseño propio con HTML semántico y CSS adaptable a móviles y escritorio. Esto permitirá practicar los contenidos de Interfaces y ajustar formularios, navegación y estados de disponibilidad a las necesidades del centro, manteniendo colores, tipografía y espaciados coherentes.
 
-El frontend usa Vite sin framework (plantilla *vanilla*): sigue siendo HTML, CSS y JavaScript, pero con servidor de desarrollo con recarga automática y variables de entorno.
+### Backend
 
-## Estructura del repositorio
+Python con Django 5.2 LTS, por ser el framework trabajado en el módulo de Servidor. Su ORM, migraciones, autenticación y panel de administración facilitan la gestión de datos y usuarios. Se elige una versión LTS para disponer de una base con soporte prolongado.
 
-```
-iron-gym/
-├── backend/            Proyecto Django (config/ = ajustes, core/ = app principal)
-├── frontend/           Proyecto Vite (HTML, CSS y JavaScript)
-├── docs/               Documentación técnica
-├── .vscode/launch.json Configuración para arrancar con F5 en VS Code
-├── .env.example        Variables de entorno necesarias (sin secretos)
-├── docker-compose.yml  Arranque opcional con Docker
-└── README.md
-```
+### Frontend
 
-## Puesta en marcha en local
+HTML, CSS y JavaScript con Vite. JavaScript permitirá consultar el backend y actualizar la interfaz; Vite proporcionará el servidor de desarrollo y la compilación de recursos. Para el alcance inicial no se necesita un framework adicional de componentes.
 
-Requisitos: **Git**, **Python 3.12 o superior** y **Node.js 20.19 o superior** (con npm).
+### Base de datos
 
-Los comandos se ejecutan desde la raíz del repositorio salvo que se indique otra cosa. Cuando cambian entre Windows y Linux/macOS, aparecen los dos.
+SQLite como motor relacional inicial. Socios, instalaciones, horarios y reservas tienen relaciones claras y necesitan restricciones de integridad. SQLite se integra con Django y permite trabajar en local sin instalar un servidor de base de datos independiente.
 
-### 1. Clonar el repositorio
+### Documentación
 
-```bash
-git clone https://github.com/alvaromolmateo-cmd/iron-gym.git
-cd iron-gym
-```
+Markdown dentro del repositorio, con el README como punto de entrada. Permite mantener las explicaciones y decisiones junto al código, revisar sus cambios con Git y leerlas directamente en GitHub. En hitos posteriores se añadirá la documentación técnica en docs/.
 
-### 2. Configurar las variables de entorno
+### Librerías y dependencias
 
-```bash
-cp .env.example .env
-```
+- Autenticación, validación, ORM y migraciones de Django: cubren las necesidades iniciales aprovechando las herramientas del framework.
+- Sistema de pruebas de Django: permitirá comprobar las reglas de reservas y las respuestas del backend.
+- django-cors-headers: permitirá la comunicación del frontend con el backend cuando se ejecuten en orígenes distintos durante el desarrollo.
+- python-dotenv: facilitará cargar la configuración local desde variables de entorno sin incluir secretos en Git.
+- Vite: gestionará el desarrollo y la construcción del frontend.
 
-| Variable | Qué poner |
-| --- | --- |
-| `DJANGO_SECRET_KEY` | Una clave aleatoria. Genérala con `python -c "import secrets; print(secrets.token_urlsafe(50))"` |
-| `DJANGO_DEBUG` | `True` en local |
-| `DJANGO_ALLOWED_HOSTS` | `localhost,127.0.0.1` en local |
-| `CORS_ALLOWED_ORIGINS` | URL del frontend: `http://localhost:5173,http://127.0.0.1:5173` |
-| `VITE_API_URL` | URL de la API: `http://localhost:8000/api` |
+### Control de versiones
 
-Con los valores de ejemplo ya funciona en local; solo conviene cambiar `DJANGO_SECRET_KEY`.
+Se usará Git con GitHub para conservar el historial y facilitar la revisión del profesor. El acceso al remoto será por HTTPS, compatible con la red WIFI_EDU.
 
-### 3. Instalar las dependencias
+La rama principal será main y develop se usará para integrar el trabajo. Las tareas se desarrollarán en ramas feature/nombre y se integrarán mediante revisión. Los commits serán pequeños y descriptivos, con prefijos como docs:, feat: y fix: para indicar su propósito.
 
-Backend (con un entorno virtual de Python):
+Si el repositorio es privado, se dará acceso al profesor como colaborador.
 
-```bash
-cd backend
-python -m venv .venv
-# Windows (PowerShell)
-.venv\Scripts\Activate.ps1
-# Linux / macOS
-source .venv/bin/activate
-pip install -r requirements.txt
-cd ..
-```
+## Estado y entrega del Hito 0
 
-Frontend:
+Este hito contiene la definición del proyecto y sus tecnologías. La estructura ejecutable y la conexión entre frontend y backend se realizarán en el Hito 1.
 
-```bash
-cd frontend
-npm install
-cd ..
-```
+Repositorio: https://github.com/alvaromolmateo-cmd/iron-gym
 
-### 4. Preparar la base de datos
+Para entregar, hay que confirmar y subir este README al repositorio y enviar el enlace por el canal indicado por el profesor.
 
-En desarrollo se usa SQLite, así que no hay que instalar nada: el archivo `backend/db.sqlite3` se crea al migrar. Con el entorno virtual activado:
-
-```bash
-cd backend
-python manage.py migrate
-python manage.py createsuperuser   # opcional, para entrar en /admin
-```
-
-Por ahora no hay *seeders*.
-
-### 5. Arrancar el backend
-
-Con el entorno virtual activado y desde `backend/`:
-
-```bash
-python manage.py runserver
-```
-
-Queda disponible en **http://localhost:8000** (API en `/api/` y administración en `/admin/`).
-
-### 6. Arrancar el frontend
-
-En otra terminal, desde `frontend/`:
-
-```bash
-npm run dev
-```
-
-Queda disponible en **http://localhost:5173**.
-
-### 7. Comprobar que funciona
-
-- Abre **http://localhost:8000/api/health**. Debe devolver un JSON con `"status": "ok"`.
-- Abre **http://localhost:5173**. Debe aparecer *Backend conectado: ok* junto a la respuesta del endpoint. Eso demuestra que el frontend y el backend se comunican.
-
-### Arrancar con F5 en VS Code
-
-En `.vscode/launch.json` hay tres configuraciones (pestaña *Ejecución y depuración*):
-
-- **Backend: Django (runserver)**: arranca Django con el depurador. Usa el intérprete de `backend/.venv`, así que antes hay que completar el paso 3.
-- **Frontend: Vite (npm run dev)**: arranca el servidor de Vite.
-- **Iron Gym: Backend + Frontend**: arranca los dos a la vez.
-
-Hace falta la extensión *Python Debugger* (debugpy) de Microsoft.
-
-## Arranque con Docker (opcional)
-
-Con Docker Desktop en marcha y el `.env` creado (paso 2):
-
-```bash
-docker compose up --build
-```
-
-Levanta el backend en http://localhost:8000 (aplica las migraciones al arrancar) y el frontend en http://localhost:5173. La base de datos SQLite se guarda en el volumen `backend-data`. Para pararlo, usa `docker compose down`.
-
-## Documentación
-
-- [Instalación y configuración del entorno](docs/instalacion.md)
-
-## Estado
-
-Hito 1: estructura base (*boilerplate*) del backend y del frontend, comunicados mediante `/api/health`. También están definidos los modelos principales (`Usuario`, `Instalacion`, `Horario`, `Reserva` y `Bloqueo`) y registrados en el panel de administración.
+Enunciado: https://github.com/jpaniorte/2daw-daw-2627/blob/main/proyectos/pdf/hito0.pdf
