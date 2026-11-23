@@ -1,8 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.password_validation import validate_password
 from .models import MyUser
 
+
+# UD5.2b - AuthenticationForm usa USERNAME_FIELD aunque el campo se llame username.
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(label='Correo electrónico', widget=forms.EmailInput(attrs={
+        'class': 'form-control', 'autocomplete': 'username', 'autofocus': True,
+    }))
+    password = forms.CharField(label='Contraseña', strip=False, widget=forms.PasswordInput(attrs={
+        'class': 'form-control', 'autocomplete': 'current-password',
+    }))
 
 
 # UD5.1 - Alta en el administrador sin guardar contraseñas en texto plano.

@@ -150,3 +150,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # UD5.1 - Autenticacion mediante email.
 AUTH_USER_MODEL = 'usuarios.MyUser'
+
+# UD5.2 - Login y redireccion tras el acceso.
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'panel'

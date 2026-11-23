@@ -6,7 +6,7 @@ from .forms import MyUserCreationForm
 from .models import MyUser
 
 
-# UD5.1 - Pruebas del usuario personalizado.
+# UD5.1 - Usuario personalizado.
 class UsuarioTests(TestCase):
     def test_crear_usuario_sin_username(self):
         user = MyUser.objects.create_user('ana@EXAMPLE.COM', password='UnaClaveDePrueba-2026!')
@@ -50,3 +50,47 @@ class UsuarioTests(TestCase):
         form = MyUserCreationForm(data={'email': 'nuevo@example.com', 'password1': 'abc', 'password2': 'xyz'})
         self.assertFalse(form.is_valid())
         self.assertIn('password2', form.errors)
+
+# UD5.2 - Login y logout.
+class LoginLogoutTests(TestCase):
+    def setUp(self):
+        self.password = 'ClaveDeEnsayo-2026!'
+        self.user = MyUser.objects.create_user('socio@example.com', password=self.password)
+
+    def test_login_email_y_sesion(self):
+        self.assertContains(self.client.get(reverse('login')), 'type="email"')
+        respuesta = self.client.post(reverse('login'), {'username': self.user.email, 'password': self.password})
+        self.assertRedirects(respuesta, reverse('panel'))
+        self.assertEqual(self.client.session['_auth_user_id'], str(self.user.pk))
+        self.assertContains(self.client.get(reverse('home')), self.user.email)
+
+    def test_password_incorrecta_o_usuario_inactivo(self):
+        respuesta = self.client.post(reverse('login'), {'username': self.user.email, 'password': 'incorrecta'})
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertTrue(respuesta.context['form'].non_field_errors())
+        self.assertNotIn('_auth_user_id', self.client.session)
+        self.user.is_active = False
+        self.user.save()
+        self.client.post(reverse('login'), {'username': self.user.email, 'password': self.password})
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+    def test_next_local_y_rechazo_de_redireccion_externa(self):
+        for destino, esperado in [('/instalacion_list/', '/instalacion_list/'),
+                                  ('https://example.com/externo', reverse('panel'))]:
+            self.client.logout()
+            respuesta = self.client.post(reverse('login'), {
+                'username': self.user.email, 'password': self.password, 'next': destino,
+            })
+            self.assertRedirects(respuesta, esperado)
+
+    def test_logout_post_y_csrf(self):
+        from django.test import Client
+        client = Client(enforce_csrf_checks=True)
+        client.force_login(self.user)
+        self.assertEqual(client.get(reverse('logout')).status_code, 405)
+        self.assertEqual(client.post(reverse('logout')).status_code, 403)
+        client.get(reverse('home'))
+        token = client.cookies['csrftoken'].value
+        respuesta = client.post(reverse('logout'), {'csrfmiddlewaretoken': token})
+        self.assertRedirects(respuesta, reverse('home'))
+        self.assertNotIn('_auth_user_id', client.session)

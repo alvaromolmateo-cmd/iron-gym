@@ -1,0 +1,27 @@
+{% extends "common/base_website.html" %}
+
+{% block content %}
+<!-- UD5.2b - Acceso por correo y contraseña con errores de autenticación. -->
+<main class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h1>Iniciar sesión</h1>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+        <div class="mb-3">
+          {{ field.label_tag }}
+          {{ field }}
+          {% for error in field.errors %}<p class="text-danger" role="alert">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock content %}

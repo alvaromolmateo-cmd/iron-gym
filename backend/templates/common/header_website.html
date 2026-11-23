@@ -3,4 +3,14 @@
   <a class="navbar-brand" href="{% url 'home' %}">Iron Gym</a>
   <a class="nav-link text-white" href="{% url 'panel' %}">Panel</a>
   <a class="nav-link text-white" href="{% url 'admin:index' %}">Administración</a>
+  <!-- UD5.2a-c - Mostrar el usuario de la sesión y permitir cerrarla mediante POST. -->
+  {% if user.is_authenticated %}
+  <span class="text-white">{{ user.email }}</span>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+  </form>
+  {% else %}
+  <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+  {% endif %}
 </header>

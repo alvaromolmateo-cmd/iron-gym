@@ -7,9 +7,13 @@ from django.conf.urls.static import static
 from common import views as common_views
 from billing import views as billing_views
 from core import views as core_views
+# UD5.2b-c - Autenticación propia, anterior a la integración de Allauth.
+from usuarios import views as usuarios_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("login/", usuarios_views.UsuarioLoginView.as_view(), name="login"),
+    path("logout/", usuarios_views.UsuarioLogoutView.as_view(), name="logout"),
     # UD3.7b - Inicio y panel.
     path("", common_views.HomeView.as_view(), name="home"),
     path("panel/", common_views.PanelView.as_view(), name="panel"),
