@@ -1,3 +1,6 @@
+# UD5.3 - Aplicar login_required a dispatch para proteger las vistas de clase.
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # UD4.2h - Validaciones propias reutilizadas en crear y actualizar.
 from .mixins import HorarioMixin, BloqueoMixin
 # UD4.3a - Formularios definidos en la app, siguiendo el apartado 4.1 del PDF.
@@ -15,6 +18,7 @@ from .models import Perfil, Instalacion, Horario, Reserva, Bloqueo
 
 
 # UD3.7a - Lista de Perfil.
+@method_decorator(login_required, name="dispatch")
 class PerfilListView(OrdenacionMixin, ListView):
     model = Perfil
     template_name = "core/perfil_list.html"
@@ -24,12 +28,14 @@ class PerfilListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Perfil.
+@method_decorator(login_required, name="dispatch")
 class PerfilDetailView(DetailView):
     model = Perfil
     template_name = "core/perfil_detail.html"
 
 
 # UD3.7a - Lista de Instalacion.
+@method_decorator(login_required, name="dispatch")
 class InstalacionListView(OrdenacionMixin, ListView):
     model = Instalacion
     template_name = "core/instalacion_list.html"
@@ -39,12 +45,14 @@ class InstalacionListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Instalacion.
+@method_decorator(login_required, name="dispatch")
 class InstalacionDetailView(DetailView):
     model = Instalacion
     template_name = "core/instalacion_detail.html"
 
 
 # UD3.7a - Lista de Horario.
+@method_decorator(login_required, name="dispatch")
 class HorarioListView(OrdenacionMixin, ListView):
     model = Horario
     template_name = "core/horario_list.html"
@@ -54,12 +62,14 @@ class HorarioListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Horario.
+@method_decorator(login_required, name="dispatch")
 class HorarioDetailView(DetailView):
     model = Horario
     template_name = "core/horario_detail.html"
 
 
 # UD3.7a - Lista de Reserva.
+@method_decorator(login_required, name="dispatch")
 class ReservaListView(OrdenacionMixin, ListView):
     model = Reserva
     template_name = "core/reserva_list.html"
@@ -69,12 +79,14 @@ class ReservaListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Reserva.
+@method_decorator(login_required, name="dispatch")
 class ReservaDetailView(DetailView):
     model = Reserva
     template_name = "core/reserva_detail.html"
 
 
 # UD3.7a - Lista de Bloqueo.
+@method_decorator(login_required, name="dispatch")
 class BloqueoListView(OrdenacionMixin, ListView):
     model = Bloqueo
     template_name = "core/bloqueo_list.html"
@@ -84,12 +96,14 @@ class BloqueoListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Bloqueo.
+@method_decorator(login_required, name="dispatch")
 class BloqueoDetailView(DetailView):
     model = Bloqueo
     template_name = "core/bloqueo_detail.html"
 
 
 # UD4.2a - CreateView de Perfil, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class PerfilCreateView(CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -108,6 +122,7 @@ class PerfilCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Perfil, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class PerfilUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -126,6 +141,7 @@ class PerfilUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Perfil, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class PerfilDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar perfil"
@@ -136,6 +152,7 @@ class PerfilDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView)
 
 
 # UD4.2a - CreateView de Instalacion, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class InstalacionCreateView(CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -154,6 +171,7 @@ class InstalacionCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Instalacion, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class InstalacionUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -172,6 +190,7 @@ class InstalacionUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Instalacion, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class InstalacionDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar instalacion"
@@ -182,6 +201,7 @@ class InstalacionDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, Delete
 
 
 # UD4.2a - CreateView de Horario, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class HorarioCreateView(HorarioMixin, CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -200,6 +220,7 @@ class HorarioCreateView(HorarioMixin, CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Horario, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class HorarioUpdateView(HorarioMixin, CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -218,6 +239,7 @@ class HorarioUpdateView(HorarioMixin, CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Horario, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class HorarioDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar horario"
@@ -228,6 +250,7 @@ class HorarioDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - CreateView de Reserva, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class ReservaCreateView(CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -246,6 +269,7 @@ class ReservaCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Reserva, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class ReservaUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -264,6 +288,7 @@ class ReservaUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Reserva, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class ReservaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar reserva"
@@ -274,6 +299,7 @@ class ReservaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - CreateView de Bloqueo, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class BloqueoCreateView(BloqueoMixin, CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -292,6 +318,7 @@ class BloqueoCreateView(BloqueoMixin, CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Bloqueo, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class BloqueoUpdateView(BloqueoMixin, CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -310,6 +337,7 @@ class BloqueoUpdateView(BloqueoMixin, CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Bloqueo, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class BloqueoDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar bloqueo"

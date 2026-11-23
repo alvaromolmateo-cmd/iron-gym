@@ -17,6 +17,10 @@ from common import actividadorm as orm
 
 
 class PaginasTests(TestCase):
+    def setUp(self):
+        # UD5.3 - Usuario autenticado para comprobar la funcionalidad privada.
+        self.client.force_login(get_user_model().objects.create_user(email='test-vistas@example.com'))
+
     def test_listas_vacias_y_paginas_comunes(self):
         for nombre in ("home", "panel"):
             self.assertEqual(self.client.get(reverse(nombre)).status_code, 200)
@@ -57,6 +61,10 @@ class PaginasTests(TestCase):
 
 
 class TablasMaestrasTests(TestCase):
+    def setUp(self):
+        # UD5.3 - Usuario autenticado para comprobar la funcionalidad privada.
+        self.client.force_login(get_user_model().objects.create_user(email='test-vistas@example.com'))
+
     def test_tipo_ampliable_y_protegido(self):
         tipo = TipoPerfil.objects.create(codigo="entrenador", nombre="Entrenador")
         usuario = User.objects.create_user(email="entrenador@example.com", username="entrenador")

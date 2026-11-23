@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from .models import Cliente, Factura, Cobro
@@ -7,6 +8,8 @@ from .forms import FacturaForm, CobroForm
 # UD4.1 / UD4.2b-g - Comprobaciones con una base de datos de pruebas aislada.
 class VistasEdicionTests(TestCase):
     def setUp(self):
+        # UD5.3 - Usuario autenticado para comprobar la funcionalidad privada.
+        self.client.force_login(get_user_model().objects.create_user(email='test-vistas@example.com'))
         self.cliente = Cliente.objects.create(
             nombre='Ana', apellidos='Prueba', nif='PRUEBA', email='ana@example.com',
         )
@@ -110,8 +113,9 @@ class VistasEdicionTests(TestCase):
         respuesta = self.client.post(reverse('cliente_create'), datos, follow=True)
         cliente = Cliente.objects.get(nif='EVA')
         self.assertContains(respuesta, '{} creado correctamente.'.format(cliente))
-        self.assertContains(respuesta, '<form ', count=1)
-        self.assertContains(respuesta, 'name="csrfmiddlewaretoken"', count=1)
+        # UD5.3 - Un formulario de edicion y otro para cerrar la sesion.
+        self.assertContains(respuesta, '<form ', count=2)
+        self.assertContains(respuesta, 'name="csrfmiddlewaretoken"', count=2)
         self.assertContains(respuesta, 'novalidate')
         self.assertContains(respuesta, 'col-3')
         self.assertContains(respuesta, 'col-6')

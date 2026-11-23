@@ -1,3 +1,6 @@
+# UD5.3 - Aplicar login_required a dispatch para proteger las vistas de clase.
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # UD4.3a - Formularios definidos en la app, siguiendo el apartado 4.1 del PDF.
 from .forms import ClienteForm, FacturaForm, CobroForm
 # UD4.2i - Ordenacion opcional de los listados.
@@ -15,6 +18,7 @@ from .models import Cliente, Factura, Cobro
 
 
 # UD3.7a - Lista de Cliente.
+@method_decorator(login_required, name="dispatch")
 class ClienteListView(OrdenacionMixin, ListView):
     model = Cliente
     template_name = "billing/cliente_list.html"
@@ -24,12 +28,14 @@ class ClienteListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Cliente.
+@method_decorator(login_required, name="dispatch")
 class ClienteDetailView(DetailView):
     model = Cliente
     template_name = "billing/cliente_detail.html"
 
 
 # UD3.7a - Lista de Factura.
+@method_decorator(login_required, name="dispatch")
 class FacturaListView(OrdenacionMixin, ListView):
     model = Factura
     template_name = "billing/factura_list.html"
@@ -39,12 +45,14 @@ class FacturaListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Factura.
+@method_decorator(login_required, name="dispatch")
 class FacturaDetailView(DetailView):
     model = Factura
     template_name = "billing/factura_detail.html"
 
 
 # UD3.7a - Lista de Cobro.
+@method_decorator(login_required, name="dispatch")
 class CobroListView(OrdenacionMixin, ListView):
     model = Cobro
     template_name = "billing/cobro_list.html"
@@ -54,12 +62,14 @@ class CobroListView(OrdenacionMixin, ListView):
 
 
 # UD3.7a - Detalle de Cobro.
+@method_decorator(login_required, name="dispatch")
 class CobroDetailView(DetailView):
     model = Cobro
     template_name = "billing/cobro_detail.html"
 
 
 # UD4.2a - CreateView de Cliente, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class ClienteCreateView(CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -78,6 +88,7 @@ class ClienteCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Cliente, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class ClienteUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -96,6 +107,7 @@ class ClienteUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Cliente, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class ClienteDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cliente"
@@ -106,6 +118,7 @@ class ClienteDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - CreateView de Factura, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class FacturaCreateView(CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -124,6 +137,7 @@ class FacturaCreateView(CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Factura, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class FacturaUpdateView(CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -142,6 +156,7 @@ class FacturaUpdateView(CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Factura, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar factura"
@@ -152,6 +167,7 @@ class FacturaDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView
 
 
 # UD4.2a - CreateView de Cobro, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} creado correctamente."
@@ -170,6 +186,7 @@ class CobroCreateView(CobroMixin, CrearActualizarMixin, CreateView):
 
 
 # UD4.2a - UpdateView de Cobro, con formulario generado por Django.
+@method_decorator(login_required, name="dispatch")
 class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
     # UD4.4a - Mensaje tras guardar correctamente.
     success_message = "{} actualizado correctamente."
@@ -188,6 +205,7 @@ class CobroUpdateView(CobroMixin, CrearActualizarMixin, UpdateView):
 
 
 # UD4.2a - DeleteView de Cobro, con regreso a su listado.
+@method_decorator(login_required, name="dispatch")
 class CobroDeleteView(BorradoProtegidoMixin, ConfirmarBorradoMixin, DeleteView):
     # UD4.2e - Textos propios para la plantilla compartida.
     titulo = "Eliminar cobro"

@@ -11,6 +11,8 @@ from .forms import PerfilForm, InstalacionForm, ReservaForm
 # UD4.1 / UD4.2h - Las validaciones deben actuar al crear y al actualizar.
 class IntervalosTests(TestCase):
     def setUp(self):
+        # UD5.3 - Usuario autenticado para comprobar la funcionalidad privada.
+        self.client.force_login(User.objects.create_user(email='test-vistas@example.com'))
         tipo = TipoInstalacion.objects.create(codigo='prueba', nombre='Prueba')
         self.instalacion = Instalacion.objects.create(nombre='Sala de prueba', tipo=tipo)
         self.dia, _ = DiaSemana.objects.get_or_create(numero=1, defaults={'nombre': 'Lunes'})
