@@ -1,7 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
 from .models import TipoInstalacion, Instalacion, DiaSemana, Horario, Bloqueo
-from django.contrib.auth.models import User
+# UD5.1 - Pruebas compatibles con el modelo de usuario activo.
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from .models import TipoPerfil, EstadoReserva
 from .forms import PerfilForm, InstalacionForm, ReservaForm
 
@@ -68,7 +70,7 @@ class IntervalosTests(TestCase):
 # UD4.1 / UD4.3c - Validaciones de formularios, incluidos campos vacíos.
 class FormulariosCoreTests(TestCase):
     def setUp(self):
-        self.usuario = User.objects.create(username='prueba_formularios')
+        self.usuario = User.objects.create_user(email='formularios@example.com', username='prueba_formularios')
         self.tipo, _ = TipoPerfil.objects.get_or_create(codigo='socio', defaults={'nombre': 'Socio'})
         self.estado, _ = EstadoReserva.objects.get_or_create(codigo='confirmada', defaults={'nombre': 'Confirmada'})
         self.tipo_instalacion = TipoInstalacion.objects.create(codigo='test', nombre='Tipo de prueba')

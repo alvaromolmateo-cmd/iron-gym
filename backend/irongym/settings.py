@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     # UD4.4b - Formularios Crispy con las plantillas Bootstrap 5 del PDF.
     'crispy_forms',
     'crispy_bootstrap5',
+    # UD5.1 - Modelo propio de usuario.
+    'usuarios',
     # UD3.2f Apps del proyecto
     'common',   # sin funcionalidad, por el momento
     'core',     # parte del proyecto intermodular (Iron Gym)
@@ -145,3 +147,6 @@ MESSAGE_TAGS = {messages.ERROR: 'danger'}
 # UD4.4b - Pack de plantillas indicado en el apartado 6.1 del PDF.
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# UD5.1 - Autenticacion mediante email.
+AUTH_USER_MODEL = 'usuarios.MyUser'

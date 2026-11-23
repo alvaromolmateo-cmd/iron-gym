@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+# UD5.1 - Las relaciones usan el modelo de usuario configurado.
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -19,7 +20,7 @@ class TipoPerfil(models.Model):
 
 # UD3.3a Modelo Perfil - Amplía el User de Django con el tipo de usuario
 class Perfil(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     tipo = models.ForeignKey('TipoPerfil', on_delete=models.PROTECT, default='socio')
     dni = models.CharField(max_length=20, unique=True)
     telefono = models.CharField(max_length=20, blank=True)
@@ -126,7 +127,7 @@ class EstadoReserva(models.Model):
 
 # UD3.3a Modelo Reserva - Un usuario ocupa una instalación en una franja
 class Reserva(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instalacion = models.ForeignKey(Instalacion, on_delete=models.PROTECT)
     fecha = models.DateField()
     hora_inicio = models.TimeField()
@@ -155,7 +156,7 @@ class Bloqueo(models.Model):
     inicio = models.DateTimeField()
     fin = models.DateTimeField()
     motivo = models.CharField(max_length=200)
-    creado_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    creado_por = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     # UD3.3c - No se puede registrar dos veces el mismo bloqueo de una instalación
     class Meta:

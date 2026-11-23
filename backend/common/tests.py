@@ -2,7 +2,9 @@
 from datetime import time, timedelta
 from decimal import Decimal
 
-from django.contrib.auth.models import User
+# UD5.1 - Pruebas compatibles con el modelo de usuario activo.
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -28,7 +30,7 @@ class PaginasTests(TestCase):
         hoy = timezone.localdate()
         ahora = timezone.now()
         for i in range(11):
-            usuario = User.objects.create_user(username=f"socio{i}")
+            usuario = User.objects.create_user(email=f"socio{i}@example.com", username=f"socio{i}")
             cliente = Cliente.objects.create(nombre=f"Cliente{i}", apellidos="Prueba", nif=f"N{i}", email=f"c{i}@example.com")
             factura = Factura.objects.create(cliente=cliente, numero=f"F{i:02}", concepto="Cuota")
             cobro = Cobro.objects.create(factura=factura, importe=5)
@@ -57,7 +59,7 @@ class PaginasTests(TestCase):
 class TablasMaestrasTests(TestCase):
     def test_tipo_ampliable_y_protegido(self):
         tipo = TipoPerfil.objects.create(codigo="entrenador", nombre="Entrenador")
-        usuario = User.objects.create_user(username="entrenador")
+        usuario = User.objects.create_user(email="entrenador@example.com", username="entrenador")
         perfil = Perfil.objects.create(usuario=usuario, tipo=tipo, dni="PRUEBA")
         self.assertIn("Entrenador", str(perfil))
         self.assertContains(self.client.get(reverse("perfil_detail", args=[perfil.pk])), "Entrenador")
