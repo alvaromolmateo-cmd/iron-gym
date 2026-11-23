@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     # UD4.4b - Formularios Crispy con las plantillas Bootstrap 5 del PDF.
     'crispy_forms',
     'crispy_bootstrap5',
-    # UD5.1 - Modelo propio de usuario.
+    # UD5.1 - Modelo propio de usuario con email como identificador.
     'usuarios',
+    # UD5.4 - Autenticación local con las plantillas incluidas en Allauth.
+    'allauth',
+    'allauth.account',
     # UD3.2f Apps del proyecto
     'common',   # sin funcionalidad, por el momento
     'core',     # parte del proyecto intermodular (Iron Gym)
@@ -57,6 +60,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # UD5.4 - Contexto de cuenta requerido por Allauth.
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -141,16 +146,32 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# UD5.1 - Utilizar MyUser en autenticación y relaciones de otras apps.
+AUTH_USER_MODEL = 'usuarios.MyUser'
+
+# UD5.2 - Destino de acceso y redirección tras autenticar correctamente.
+# UD5.4 - El acceso principal pasa a Allauth; /login/ conserva UD5.2.
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'panel'
+
+# UD5.4 - Se conserva ModelBackend para la versión de UD5.2 y el administrador.
+# Fuente: https://docs.allauth.org/en/latest/installation/quickstart.html
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+# Fuente: https://docs.allauth.org/en/latest/account/configuration.html
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+# UD5.4 - Correo de desarrollo; el envío real se configura en UD5.5.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # UD4.4a - Configuración necesaria para los errores de UD4.2f y UD4.2g.
 MESSAGE_TAGS = {messages.ERROR: 'danger'}
 
 # UD4.4b - Pack de plantillas indicado en el apartado 6.1 del PDF.
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-# UD5.1 - Autenticacion mediante email.
-AUTH_USER_MODEL = 'usuarios.MyUser'
-
-# UD5.2 - Login y redireccion tras el acceso.
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'panel'

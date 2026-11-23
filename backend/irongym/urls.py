@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 # UD3.2e - Ficheros multimedia en desarrollo.
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,6 +14,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", usuarios_views.UsuarioLoginView.as_view(), name="login"),
     path("logout/", usuarios_views.UsuarioLogoutView.as_view(), name="logout"),
+    # UD5.4 - Versión Allauth: login, logout y recuperación de contraseña.
+    # Las rutas /login/ y /logout/ anteriores mantienen la solución de UD5.2.
+    path("accounts/", include("allauth.urls")),
     # UD3.7b - Inicio y panel.
     path("", common_views.HomeView.as_view(), name="home"),
     path("panel/", common_views.PanelView.as_view(), name="panel"),
